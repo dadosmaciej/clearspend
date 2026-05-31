@@ -575,31 +575,31 @@ The Inter variable font bundle (`@fontsource-variable/inter`) is approximately 7
 
 #### Automated
 
-- [x] 3.1 `npm run build` passes
-- [x] 3.2 TypeScript type check passes
+- [x] 3.1 `npm run build` passes — 9261e4b
+- [x] 3.2 TypeScript type check passes — 9261e4b
 
 #### Manual
 
-- [x] 3.3 `/auth/signin` uses new dark background (no gradient, no blurred orbs)
-- [x] 3.4 Input fields visible against new background
-- [x] 3.5 Form submission still works (signin redirects to `/dashboard`)
-- [x] 3.6 `/auth/signup` and `/auth/confirm-email` visually consistent with signin
+- [x] 3.3 `/auth/signin` uses new dark background (no gradient, no blurred orbs) — 9261e4b
+- [x] 3.4 Input fields visible against new background — 9261e4b
+- [x] 3.5 Form submission still works (signin redirects to `/dashboard`) — 9261e4b
+- [x] 3.6 `/auth/signup` and `/auth/confirm-email` visually consistent with signin — 9261e4b
 
 ### Phase 4: Dashboard Rebuild
 
 #### Automated
 
-- [ ] 4.1 `npm run build` passes
-- [ ] 4.2 TypeScript types correct (Supabase typed rows)
+- [x] 4.1 `npm run build` passes
+- [x] 4.2 TypeScript types correct (Supabase typed rows)
 
 #### Manual
 
-- [ ] 4.3 "Welcome back" heading and user email visible
-- [ ] 4.4 "Upload receipt" button navigates to upload page
-- [ ] 4.5 With receipts: list shows up to 5 rows with shop name, date, amount, status badge
-- [ ] 4.6 With no receipts: empty state and "Upload your first receipt" link shown
-- [ ] 4.7 "View all receipts" link navigates to `/receipts`
-- [ ] 4.8 Receipt row links navigate to correct detail page
+- [x] 4.3 "Welcome back" heading and user email visible
+- [x] 4.4 "Upload receipt" button navigates to upload page
+- [x] 4.5 With receipts: list shows up to 5 rows with shop name, date, amount, status badge
+- [x] 4.6 With no receipts: empty state and "Upload your first receipt" link shown
+- [x] 4.7 "View all receipts" link navigates to `/receipts`
+- [x] 4.8 Receipt row links navigate to correct detail page
 
 ### Phase 5: App Pages Restyle
 

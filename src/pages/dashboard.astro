@@ -1,27 +1,108 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { createClient } from "@/lib/supabase";
 
 const { user } = Astro.locals;
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+const recentReceipts = supabase
+  ? ((
+      await supabase
+        .from("receipts")
+        .select("id, shop_name, purchase_date, total_amount, processing_status, created_at")
+        .order("created_at", { ascending: false })
+        .limit(5)
+    ).data ?? [])
+  : [];
+
+const STATUS_LABELS: Record<string, string> = {
+  pending: "Pending",
+  processing: "Processing",
+  done: "Done",
+  failed: "Failed",
+};
+
+const STATUS_CLASSES: Record<string, string> = {
+  pending: "bg-neutral-700/60 text-neutral-300",
+  processing: "bg-yellow-900/40 text-yellow-300",
+  done: "bg-green-900/40 text-green-300",
+  failed: "bg-red-900/40 text-red-300",
+};
 ---
 
 <Layout title="Dashboard">
-  <div class="bg-cosmic flex min-h-screen items-center justify-center p-4">
-    <div class="rounded-2xl border border-white/10 bg-white/10 p-8 text-center text-white backdrop-blur-xl">
-      <h1 class="mb-4 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-3xl font-bold text-transparent">
-        Dashboard
-      </h1>
-      <p class="text-blue-100/80">
-        Welcome, <span class="font-semibold text-white">{user?.email}</span>
-      </p>
-      <p class="mt-2 text-sm text-blue-100/50">This page is only for authenticated users.</p>
-      <form method="POST" action="/api/auth/signout" class="mt-6">
-        <button
-          type="submit"
-          class="rounded-lg border border-white/20 bg-white/10 px-4 py-2 text-sm transition-colors hover:bg-white/20"
-        >
-          Sign out
-        </button>
-      </form>
-    </div>
+  <div class="mx-auto max-w-3xl px-4 py-8">
+    <h1 class="mb-1 text-2xl font-bold text-foreground">Welcome back</h1>
+    <p class="mb-8 text-sm text-muted-foreground">{user?.email}</p>
+
+    <a
+      href="/receipts/upload"
+      class="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-purple-500"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="17 8 12 3 7 8"></polyline>
+        <line x1="12" x2="12" y1="3" y2="15"></line>
+      </svg>
+      Upload receipt
+    </a>
+
+    <h2 class="mb-4 mt-10 text-lg font-semibold text-foreground">Recent receipts</h2>
+
+    {
+      recentReceipts.length === 0 ? (
+        <p class="text-sm text-muted-foreground">
+          No receipts yet.{" "}
+          <a href="/receipts/upload" class="text-purple-400 hover:text-purple-300">
+            Upload your first receipt →
+          </a>
+        </p>
+      ) : (
+        <ul class="flex flex-col gap-2">
+          {recentReceipts.map((r) => (
+            <li>
+              <a
+                href={`/receipts/${r.id}`}
+                class="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:bg-card/80"
+              >
+                <div>
+                  <p class={r.shop_name ? "text-sm font-medium text-foreground" : "text-sm text-muted-foreground"}>
+                    {r.shop_name ?? "Unknown shop"}
+                  </p>
+                  <p class="text-xs text-muted-foreground">
+                    {r.purchase_date ?? r.created_at.slice(0, 10)}
+                  </p>
+                </div>
+                <div class="flex items-center gap-3">
+                  {r.total_amount != null && (
+                    <span class="text-sm text-foreground">€{r.total_amount.toFixed(2)}</span>
+                  )}
+                  <span
+                    class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_CLASSES[r.processing_status] ?? STATUS_CLASSES.pending}`}
+                  >
+                    {STATUS_LABELS[r.processing_status] ?? "Pending"}
+                  </span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <a href="/receipts" class="mt-6 inline-block text-sm text-purple-400 hover:text-purple-300">
+      View all receipts →
+    </a>
   </div>
 </Layout>
