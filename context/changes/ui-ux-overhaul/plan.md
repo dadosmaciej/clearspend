@@ -562,28 +562,28 @@ The Inter variable font bundle (`@fontsource-variable/inter`) is approximately 7
 
 #### Automated
 
-- [x] 2.1 `npm run build` passes (no broken imports from deleted files)
+- [x] 2.1 `npm run build` passes (no broken imports from deleted files) — e8e031c
 
 #### Manual
 
-- [x] 2.2 `/` shows "Know what's in every receipt" heading
-- [x] 2.3 Three How-it-works steps visible with icons
-- [x] 2.4 "Get started free" CTA links to `/auth/signup`
-- [x] 2.5 Page is responsive on mobile
+- [x] 2.2 `/` shows "Know what's in every receipt" heading — e8e031c
+- [x] 2.3 Three How-it-works steps visible with icons — e8e031c
+- [x] 2.4 "Get started free" CTA links to `/auth/signup` — e8e031c
+- [x] 2.5 Page is responsive on mobile — e8e031c
 
 ### Phase 3: Auth Pages Restyle
 
 #### Automated
 
-- [ ] 3.1 `npm run build` passes
-- [ ] 3.2 TypeScript type check passes
+- [x] 3.1 `npm run build` passes
+- [x] 3.2 TypeScript type check passes
 
 #### Manual
 
-- [ ] 3.3 `/auth/signin` uses new dark background (no gradient, no blurred orbs)
-- [ ] 3.4 Input fields visible against new background
-- [ ] 3.5 Form submission still works (signin redirects to `/dashboard`)
-- [ ] 3.6 `/auth/signup` and `/auth/confirm-email` visually consistent with signin
+- [x] 3.3 `/auth/signin` uses new dark background (no gradient, no blurred orbs)
+- [x] 3.4 Input fields visible against new background
+- [x] 3.5 Form submission still works (signin redirects to `/dashboard`)
+- [x] 3.6 `/auth/signup` and `/auth/confirm-email` visually consistent with signin
 
 ### Phase 4: Dashboard Rebuild
 
