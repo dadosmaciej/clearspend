@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { UploadForm } from "@/components/receipts/UploadForm";
+---
+
+<Layout title="Upload Receipt">
+  <main class="mx-auto max-w-md px-4 py-8">
+    <h1 class="mb-6 text-2xl font-semibold text-neutral-100">Upload Receipt</h1>
+    <UploadForm client:only="react" />
+  </main>
+</Layout>

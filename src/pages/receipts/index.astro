@@ -1,0 +1,154 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { createClient } from "@/lib/supabase";
+import { QueryForm } from "@/components/receipts/QueryForm";
+
+// Compute preset date ranges
+const today = new Date();
+
+const thisMonthFrom = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-01`;
+const thisMonthTo = new Date(today.getFullYear(), today.getMonth() + 1, 0).toISOString().slice(0, 10);
+
+const lastMonthDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+const lastMonthFrom = `${lastMonthDate.getFullYear()}-${String(lastMonthDate.getMonth() + 1).padStart(2, "0")}-01`;
+const lastMonthTo = new Date(today.getFullYear(), today.getMonth(), 0).toISOString().slice(0, 10);
+
+const last3MonthsDate = new Date(today.getFullYear(), today.getMonth() - 2, 1);
+const last3MonthsFrom = `${last3MonthsDate.getFullYear()}-${String(last3MonthsDate.getMonth() + 1).padStart(2, "0")}-01`;
+const last3MonthsTo = thisMonthTo;
+
+// Read filter params, defaulting to current month
+const from = Astro.url.searchParams.get("from") ?? thisMonthFrom;
+const to = Astro.url.searchParams.get("to") ?? thisMonthTo;
+
+// Determine active preset
+const isThisMonth = from === thisMonthFrom && to === thisMonthTo;
+const isLastMonth = from === lastMonthFrom && to === lastMonthTo;
+const isLast3Months = from === last3MonthsFrom && to === last3MonthsTo;
+
+const presetActive = "rounded-lg bg-purple-600 px-3 py-1.5 text-sm font-medium text-white";
+const presetDefault =
+  "rounded-lg bg-neutral-700 px-3 py-1.5 text-sm font-medium text-neutral-300 transition-colors hover:bg-neutral-600";
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+const receipts = supabase
+  ? ((
+      await supabase
+        .from("receipts")
+        .select("id, shop_name, purchase_date, total_amount, processing_status, created_at")
+        .or(`purchase_date.is.null,and(purchase_date.gte.${from},purchase_date.lte.${to})`)
+        .order("created_at", { ascending: false })
+    ).data ?? [])
+  : [];
+
+const STATUS_LABELS: Record<string, string> = {
+  pending: "Pending",
+  processing: "Processing",
+  done: "Done",
+  failed: "Failed",
+};
+
+const STATUS_CLASSES: Record<string, string> = {
+  pending: "bg-neutral-700 text-neutral-300",
+  processing: "bg-yellow-900/40 text-yellow-300",
+  done: "bg-green-900/40 text-green-300",
+  failed: "bg-red-900/40 text-red-300",
+};
+---
+
+<Layout title="Receipts">
+  <main class="mx-auto max-w-2xl px-4 py-8">
+    <div class="mb-6">
+      <QueryForm client:only="react" />
+    </div>
+
+    <div class="mb-6 flex items-center justify-between">
+      <h1 class="text-2xl font-semibold text-neutral-100">Receipts</h1>
+      <a
+        href="/receipts/upload"
+        class="rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-500"
+      >
+        Upload receipt
+      </a>
+    </div>
+
+    <!-- Date filter presets -->
+    <div class="mb-3 flex flex-wrap items-center gap-2">
+      <a
+        href={`/receipts?from=${thisMonthFrom}&to=${thisMonthTo}`}
+        class:list={isThisMonth ? presetActive : presetDefault}
+      >
+        This month
+      </a>
+      <a
+        href={`/receipts?from=${lastMonthFrom}&to=${lastMonthTo}`}
+        class:list={isLastMonth ? presetActive : presetDefault}
+      >
+        Last month
+      </a>
+      <a
+        href={`/receipts?from=${last3MonthsFrom}&to=${last3MonthsTo}`}
+        class:list={isLast3Months ? presetActive : presetDefault}
+      >
+        Last 3 months
+      </a>
+    </div>
+
+    <!-- Custom date range form -->
+    <form method="get" action="/receipts" class="mb-6 flex flex-wrap items-center gap-2">
+      <input
+        type="date"
+        name="from"
+        value={from}
+        class="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-sm text-neutral-100 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+      />
+      <span class="text-sm text-neutral-400">–</span>
+      <input
+        type="date"
+        name="to"
+        value={to}
+        class="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-1.5 text-sm text-neutral-100 focus:ring-2 focus:ring-purple-500 focus:outline-none"
+      />
+      <button
+        type="submit"
+        class="rounded-lg bg-neutral-700 px-3 py-1.5 text-sm font-medium text-neutral-300 transition-colors hover:bg-neutral-600"
+      >
+        Apply
+      </button>
+    </form>
+
+    {
+      receipts.length === 0 ? (
+        <p class="text-neutral-400">No receipts found for this date range.</p>
+      ) : (
+        <ul class="flex flex-col gap-2">
+          {receipts.map((r) => (
+            <li>
+              <a
+                href={`/receipts/${r.id}`}
+                class="flex items-center justify-between rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3 transition-colors hover:border-neutral-600 hover:bg-neutral-700"
+              >
+                <div class="flex flex-col gap-0.5">
+                  <span class="font-medium text-neutral-100">{r.shop_name ?? "Unknown shop"}</span>
+                  <span class="text-sm text-neutral-400">{r.purchase_date ?? r.created_at.slice(0, 10)}</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  {r.total_amount != null && <span class="text-neutral-100">€{r.total_amount.toFixed(2)}</span>}
+                  <span
+                    class:list={`rounded px-2 py-0.5 text-xs font-medium ${STATUS_CLASSES[r.processing_status] ?? STATUS_CLASSES.pending}`}
+                  >
+                    {STATUS_LABELS[r.processing_status] ?? r.processing_status}
+                  </span>
+                  <span class="text-neutral-500" aria-hidden="true">
+                    →
+                  </span>
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </main>
+</Layout>

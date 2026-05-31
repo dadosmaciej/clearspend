@@ -1,0 +1,142 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { createClient } from "@/lib/supabase";
+
+const { id } = Astro.params;
+
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+
+if (!supabase) {
+  return new Response("Internal server error", { status: 500 });
+}
+
+const receiptId = id ?? "";
+
+const { data: receipt } = await supabase.from("receipts").select("*, line_items(*)").eq("id", receiptId).single();
+
+if (!receipt) {
+  return new Response("Receipt not found", { status: 404 });
+}
+
+const { data: signedData } = await supabase.storage.from("receipts").createSignedUrl(receipt.image_path, 300);
+
+const imageUrl = signedData?.signedUrl ?? null;
+
+interface LineItem {
+  id: string;
+  name: string;
+  price: number;
+  category: string | null;
+  position: number;
+  receipt_id: string;
+  created_at: string;
+}
+
+const lineItems: LineItem[] = [...(receipt.line_items as LineItem[])].sort((a, b) => a.position - b.position);
+
+const CATEGORY_CLASSES: Record<string, string> = {
+  food: "bg-green-900/40 text-green-300",
+  fuel: "bg-yellow-900/40 text-yellow-300",
+  electronics: "bg-blue-900/40 text-blue-300",
+  household: "bg-neutral-700 text-neutral-300",
+  health: "bg-neutral-700 text-neutral-300",
+  clothing: "bg-neutral-700 text-neutral-300",
+  transport: "bg-neutral-700 text-neutral-300",
+  entertainment: "bg-neutral-700 text-neutral-300",
+  other: "bg-neutral-800 text-neutral-400",
+};
+---
+
+<Layout title={receipt.shop_name ?? "Receipt"}>
+  <main class="mx-auto max-w-2xl px-4 py-8">
+    <a
+      href="/receipts"
+      class="mb-6 inline-flex items-center gap-1 text-sm text-neutral-400 transition-colors hover:text-neutral-200"
+    >
+      ← Back to receipts
+    </a>
+
+    <!-- Header -->
+    <div class="mb-6">
+      <h1 class="text-2xl font-semibold text-neutral-100">
+        {receipt.shop_name ?? "Unknown shop"}
+      </h1>
+      <div class="mt-1 flex flex-wrap items-center gap-3 text-sm text-neutral-400">
+        <span>{receipt.purchase_date ?? "Date unknown"}</span>
+        {
+          receipt.total_amount != null && (
+            <span class="font-medium text-neutral-200">€{receipt.total_amount.toFixed(2)}</span>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Status banner for non-done receipts -->
+    {
+      receipt.processing_status === "processing" && (
+        <div class="mb-6 rounded-lg border border-yellow-700/50 bg-yellow-900/20 px-4 py-3 text-sm text-yellow-300">
+          Extraction in progress — check back shortly.
+        </div>
+      )
+    }
+    {
+      receipt.processing_status === "failed" && (
+        <div class="mb-6 rounded-lg border border-red-700/50 bg-red-900/20 px-4 py-3 text-sm text-red-300">
+          Extraction failed. The image was saved but no items could be read.
+        </div>
+      )
+    }
+    {
+      receipt.processing_status === "pending" && (
+        <div class="mb-6 rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3 text-sm text-neutral-400">
+          Queued for processing.
+        </div>
+      )
+    }
+
+    <!-- Receipt image -->
+    {
+      imageUrl && (
+        <div class="mb-6">
+          <a href={imageUrl} target="_blank" rel="noopener noreferrer">
+            <img
+              src={imageUrl}
+              alt="Receipt"
+              class="max-w-xs rounded-lg border border-neutral-700 transition-opacity hover:opacity-80"
+            />
+          </a>
+        </div>
+      )
+    }
+
+    <!-- Line items -->
+    {
+      lineItems.length > 0 ? (
+        <div>
+          <h2 class="mb-3 text-lg font-medium text-neutral-200">Line items ({lineItems.length})</h2>
+          <ul class="flex flex-col gap-2">
+            {lineItems.map((item) => (
+              <li class="flex items-center justify-between rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3">
+                <span class="font-medium text-neutral-100">{item.name}</span>
+                <div class="flex items-center gap-3">
+                  {item.category && (
+                    <span
+                      class:list={`rounded px-2 py-0.5 text-xs font-medium ${CATEGORY_CLASSES[item.category] ?? CATEGORY_CLASSES.other}`}
+                    >
+                      {item.category}
+                    </span>
+                  )}
+                  <span class="text-neutral-100">€{item.price.toFixed(2)}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        receipt.processing_status === "done" && (
+          <p class="text-neutral-400">No line items were extracted from this receipt.</p>
+        )
+      )
+    }
+  </main>
+</Layout>
