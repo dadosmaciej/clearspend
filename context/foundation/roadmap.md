@@ -1,9 +1,9 @@
 ---
 project: "ClearSpend"
-version: 1
+version: 2
 status: draft
 created: 2026-05-26
-updated: 2026-05-26
+updated: 2026-05-31
 prd_version: 1
 main_goal: market-feedback
 top_blocker: capacity
@@ -34,6 +34,7 @@ ClearSpend fills the gap that existing expense trackers ignore: they capture tra
 | S-01 | receipt-upload-extraction  | upload a receipt photo, see every extracted line item, price, category, shop name, and date              | F-01, F-02       | US-01, FR-001, FR-002, FR-003, FR-004, FR-005, FR-006, FR-007 | proposed |
 | S-02 | receipt-list-detail        | browse receipts filtered by date range and view full line-item detail for any receipt                    | F-01             | FR-008, FR-009                                               | proposed |
 | S-03 | natural-language-querying  | ask a natural language expense question and receive a sourced answer citing specific receipts             | F-01, F-02, S-01 | FR-010, FR-011, FR-012                                       | proposed |
+| S-04 | ui-ux-overhaul             | experience a polished landing page, meaningful dashboard with spending summary, and consistent styling    | S-01, S-02, S-03 | —                                                            | proposed |
 
 ## Streams
 
@@ -125,6 +126,20 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Risk:** Sequenced last because it depends on real indexed receipts from S-01; a retrieval pipeline built on empty data is unverifiable. The secondary Success Criterion confirms this is valuable but not the core hypothesis.
 - **Status:** proposed
 
+### S-04: UI/UX overhaul
+
+- **Outcome:** user lands on a compelling marketing/landing page that explains the product; after sign-in they see a dashboard with a meaningful spending summary (total this month, top categories, recent receipts); all pages share consistent typography, spacing, and color usage.
+- **Change ID:** ui-ux-overhaul
+- **PRD refs:** —
+- **Prerequisites:** S-01, S-02, S-03 (overhaul is most useful once all functional slices exist and real data flows through the UI)
+- **Parallel with:** —
+- **Blockers:** —
+- **Unknowns:**
+  - What should the dashboard surface? (totals by category, month-over-month trend, recent receipts, NL query shortcut) — Owner: user. Block: no (decide during `/10x-plan ui-ux-overhaul`).
+  - Is the landing page public (pre-auth marketing) or the post-auth home screen? — Owner: user. Block: no.
+- **Risk:** Low functional risk — no new data model or API work. Main risk is scope creep; keeping the overhaul focused on the three named surfaces (landing, dashboard, global styling) prevents it from ballooning.
+- **Status:** proposed
+
 ## Backlog Handoff
 
 | Roadmap ID | Change ID                  | Suggested issue title                                          | Ready for `/10x-plan` | Notes                               |
@@ -134,6 +149,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 | S-01       | receipt-upload-extraction  | Receipt photo upload + LLM extraction + list appearance        | no                    | Awaiting F-01 + F-02                |
 | S-02       | receipt-list-detail        | Receipt list (date-range filter) + full receipt detail view    | no                    | Awaiting F-01                       |
 | S-03       | natural-language-querying  | Natural language expense querying with receipt citations        | no                    | Awaiting F-01 + F-02 + S-01         |
+| S-04       | ui-ux-overhaul             | Landing page, dashboard with spending summary, consistent styling | no                  | Awaiting S-01, S-02, S-03           |
 
 ## Open Roadmap Questions
 
