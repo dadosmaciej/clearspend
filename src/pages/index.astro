@@ -1,8 +1,159 @@
 ---
-import Welcome from "@/components/Welcome.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
 
-<Layout>
-  <Welcome />
+<Layout title="ClearSpend — Know what's in every receipt">
+  <!-- Hero -->
+  <section class="mx-auto max-w-3xl px-4 py-24 text-center sm:py-32">
+    <h1 class="mb-6 text-4xl font-bold text-foreground sm:text-5xl">
+      Know what's in every receipt
+    </h1>
+    <p class="mx-auto mb-10 max-w-xl text-lg text-muted-foreground">
+      Upload a receipt photo. ClearSpend extracts every line item automatically
+      and makes your expenses conversationally queryable.
+    </p>
+    <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a
+        href="/auth/signup"
+        class="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-purple-500"
+      >
+        Get started free
+      </a>
+      <a
+        href="/auth/signin"
+        class="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
+      >
+        Sign in
+      </a>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="mx-auto max-w-4xl px-4 py-16">
+    <h2 class="mb-12 text-center text-2xl font-semibold text-foreground">
+      How it works
+    </h2>
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+      <!-- Step 1 -->
+      <div class="text-center">
+        <div
+          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-purple-400"
+          >
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
+            ></path>
+            <circle cx="12" cy="13" r="3"></circle>
+          </svg>
+        </div>
+        <div
+          class="mb-2 text-xs font-semibold uppercase tracking-wider text-purple-400"
+        >
+          Step 1
+        </div>
+        <h3 class="mb-2 font-semibold text-foreground">
+          Photograph your receipt
+        </h3>
+        <p class="text-sm text-muted-foreground">
+          Take a photo with your phone and upload from your gallery.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="text-center">
+        <div
+          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-purple-400"
+          >
+            <path
+              d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"
+            ></path>
+            <path d="M5 3v4"></path>
+            <path d="M19 17v4"></path>
+            <path d="M3 5h4"></path>
+            <path d="M17 19h4"></path>
+          </svg>
+        </div>
+        <div
+          class="mb-2 text-xs font-semibold uppercase tracking-wider text-purple-400"
+        >
+          Step 2
+        </div>
+        <h3 class="mb-2 font-semibold text-foreground">
+          Items extracted automatically
+        </h3>
+        <p class="text-sm text-muted-foreground">
+          Every line item, price, shop name, and date is pulled out by AI.
+        </p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="text-center">
+        <div
+          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="text-purple-400"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            ></path>
+          </svg>
+        </div>
+        <div
+          class="mb-2 text-xs font-semibold uppercase tracking-wider text-purple-400"
+        >
+          Step 3
+        </div>
+        <h3 class="mb-2 font-semibold text-foreground">
+          Ask questions in plain English
+        </h3>
+        <p class="text-sm text-muted-foreground">
+          Query your expense history naturally: "How much on food last month?"
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer CTA -->
+  <section class="mx-auto max-w-3xl px-4 py-16 text-center">
+    <h2 class="mb-6 text-2xl font-semibold text-foreground">
+      Start tracking your expenses
+    </h2>
+    <a
+      href="/auth/signup"
+      class="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-purple-500"
+    >
+      Create free account
+    </a>
+  </section>
 </Layout>

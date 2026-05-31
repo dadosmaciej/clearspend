@@ -549,27 +549,27 @@ The Inter variable font bundle (`@fontsource-variable/inter`) is approximately 7
 
 #### Automated
 
-- [x] 1.1 `npm run build` passes
+- [x] 1.1 `npm run build` passes — f063184
 
 #### Manual
 
-- [x] 1.2 Inter font loads on every page
-- [x] 1.3 Signing in redirects to `/dashboard`
-- [x] 1.4 Authenticated pages show the Navbar (ClearSpend | Receipts | Upload | Sign out)
-- [x] 1.5 Unauthenticated pages show the Navbar (ClearSpend | Sign in | Sign up)
+- [x] 1.2 Inter font loads on every page — f063184
+- [x] 1.3 Signing in redirects to `/dashboard` — f063184
+- [x] 1.4 Authenticated pages show the Navbar (ClearSpend | Receipts | Upload | Sign out) — f063184
+- [x] 1.5 Unauthenticated pages show the Navbar (ClearSpend | Sign in | Sign up) — f063184
 
 ### Phase 2: Landing Page
 
 #### Automated
 
-- [ ] 2.1 `npm run build` passes (no broken imports from deleted files)
+- [x] 2.1 `npm run build` passes (no broken imports from deleted files)
 
 #### Manual
 
-- [ ] 2.2 `/` shows "Know what's in every receipt" heading
-- [ ] 2.3 Three How-it-works steps visible with icons
-- [ ] 2.4 "Get started free" CTA links to `/auth/signup`
-- [ ] 2.5 Page is responsive on mobile
+- [x] 2.2 `/` shows "Know what's in every receipt" heading
+- [x] 2.3 Three How-it-works steps visible with icons
+- [x] 2.4 "Get started free" CTA links to `/auth/signup`
+- [x] 2.5 Page is responsive on mobile
 
 ### Phase 3: Auth Pages Restyle
 
