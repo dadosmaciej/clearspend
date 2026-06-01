@@ -38,12 +38,12 @@ const CATEGORY_CLASSES: Record<string, string> = {
   food: "bg-green-900/40 text-green-300",
   fuel: "bg-yellow-900/40 text-yellow-300",
   electronics: "bg-blue-900/40 text-blue-300",
-  household: "bg-neutral-700 text-neutral-300",
-  health: "bg-neutral-700 text-neutral-300",
-  clothing: "bg-neutral-700 text-neutral-300",
-  transport: "bg-neutral-700 text-neutral-300",
-  entertainment: "bg-neutral-700 text-neutral-300",
-  other: "bg-neutral-800 text-neutral-400",
+  household: "bg-neutral-700/60 text-neutral-300",
+  health: "bg-neutral-700/60 text-neutral-300",
+  clothing: "bg-neutral-700/60 text-neutral-300",
+  transport: "bg-neutral-700/60 text-neutral-300",
+  entertainment: "bg-neutral-700/60 text-neutral-300",
+  other: "bg-neutral-700/60 text-neutral-400",
 };
 ---
 
@@ -51,21 +51,21 @@ const CATEGORY_CLASSES: Record<string, string> = {
   <main class="mx-auto max-w-2xl px-4 py-8">
     <a
       href="/receipts"
-      class="mb-6 inline-flex items-center gap-1 text-sm text-neutral-400 transition-colors hover:text-neutral-200"
+      class="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
     >
       ← Back to receipts
     </a>
 
     <!-- Header -->
     <div class="mb-6">
-      <h1 class="text-2xl font-semibold text-neutral-100">
+      <h1 class="text-2xl font-semibold text-foreground">
         {receipt.shop_name ?? "Unknown shop"}
       </h1>
-      <div class="mt-1 flex flex-wrap items-center gap-3 text-sm text-neutral-400">
+      <div class="mt-1 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
         <span>{receipt.purchase_date ?? "Date unknown"}</span>
         {
           receipt.total_amount != null && (
-            <span class="font-medium text-neutral-200">€{receipt.total_amount.toFixed(2)}</span>
+            <span class="font-medium text-foreground">€{receipt.total_amount.toFixed(2)}</span>
           )
         }
       </div>
@@ -88,7 +88,7 @@ const CATEGORY_CLASSES: Record<string, string> = {
     }
     {
       receipt.processing_status === "pending" && (
-        <div class="mb-6 rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3 text-sm text-neutral-400">
+        <div class="mb-6 rounded-lg border border-border bg-card px-4 py-3 text-sm text-muted-foreground">
           Queued for processing.
         </div>
       )
@@ -102,7 +102,7 @@ const CATEGORY_CLASSES: Record<string, string> = {
             <img
               src={imageUrl}
               alt="Receipt"
-              class="max-w-xs rounded-lg border border-neutral-700 transition-opacity hover:opacity-80"
+              class="max-w-xs rounded-lg border border-border transition-opacity hover:opacity-80"
             />
           </a>
         </div>
@@ -113,20 +113,20 @@ const CATEGORY_CLASSES: Record<string, string> = {
     {
       lineItems.length > 0 ? (
         <div>
-          <h2 class="mb-3 text-lg font-medium text-neutral-200">Line items ({lineItems.length})</h2>
+          <h2 class="mb-3 text-lg font-medium text-foreground">Line items ({lineItems.length})</h2>
           <ul class="flex flex-col gap-2">
             {lineItems.map((item) => (
-              <li class="flex items-center justify-between rounded-lg border border-neutral-700 bg-neutral-800 px-4 py-3">
-                <span class="font-medium text-neutral-100">{item.name}</span>
+              <li class="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3">
+                <span class="font-medium text-foreground">{item.name}</span>
                 <div class="flex items-center gap-3">
                   {item.category && (
                     <span
-                      class:list={`rounded px-2 py-0.5 text-xs font-medium ${CATEGORY_CLASSES[item.category] ?? CATEGORY_CLASSES.other}`}
+                      class:list={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${CATEGORY_CLASSES[item.category] ?? CATEGORY_CLASSES.other}`}
                     >
                       {item.category}
                     </span>
                   )}
-                  <span class="text-neutral-100">€{item.price.toFixed(2)}</span>
+                  <span class="text-foreground">€{item.price.toFixed(2)}</span>
                 </div>
               </li>
             ))}
@@ -134,7 +134,7 @@ const CATEGORY_CLASSES: Record<string, string> = {
         </div>
       ) : (
         receipt.processing_status === "done" && (
-          <p class="text-neutral-400">No line items were extracted from this receipt.</p>
+          <p class="text-muted-foreground">No line items were extracted from this receipt.</p>
         )
       )
     }

@@ -82,14 +82,14 @@ export function UploadForm() {
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <ServerError message={error} />
       <label className="flex flex-col gap-1">
-        <span className="text-sm text-neutral-300">Receipt photo</span>
+        <span className="text-sm text-muted-foreground">Receipt photo</span>
         <input
           ref={fileRef}
           type="file"
           accept="image/*"
           required
           disabled={loading}
-          className="rounded-lg border border-neutral-700 bg-neutral-800 px-3 py-2 text-sm text-neutral-100 file:mr-2 file:rounded file:border-0 file:bg-purple-600 file:px-2 file:py-1 file:text-white"
+          className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground file:mr-2 file:rounded file:border-0 file:bg-purple-600 file:px-2 file:py-1 file:text-white"
         />
       </label>
       <Button

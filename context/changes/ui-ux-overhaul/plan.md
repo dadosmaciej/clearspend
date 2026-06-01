@@ -589,29 +589,29 @@ The Inter variable font bundle (`@fontsource-variable/inter`) is approximately 7
 
 #### Automated
 
-- [x] 4.1 `npm run build` passes
-- [x] 4.2 TypeScript types correct (Supabase typed rows)
+- [x] 4.1 `npm run build` passes — 9751e8e
+- [x] 4.2 TypeScript types correct (Supabase typed rows) — 9751e8e
 
 #### Manual
 
-- [x] 4.3 "Welcome back" heading and user email visible
-- [x] 4.4 "Upload receipt" button navigates to upload page
-- [x] 4.5 With receipts: list shows up to 5 rows with shop name, date, amount, status badge
-- [x] 4.6 With no receipts: empty state and "Upload your first receipt" link shown
-- [x] 4.7 "View all receipts" link navigates to `/receipts`
-- [x] 4.8 Receipt row links navigate to correct detail page
+- [x] 4.3 "Welcome back" heading and user email visible — 9751e8e
+- [x] 4.4 "Upload receipt" button navigates to upload page — 9751e8e
+- [x] 4.5 With receipts: list shows up to 5 rows with shop name, date, amount, status badge — 9751e8e
+- [x] 4.6 With no receipts: empty state and "Upload your first receipt" link shown — 9751e8e
+- [x] 4.7 "View all receipts" link navigates to `/receipts` — 9751e8e
+- [x] 4.8 Receipt row links navigate to correct detail page — 9751e8e
 
 ### Phase 5: App Pages Restyle
 
 #### Automated
 
-- [ ] 5.1 `npm run build` passes
+- [x] 5.1 `npm run build` passes
 
 #### Manual
 
-- [ ] 5.2 `/receipts` renders with new dark palette; filter buttons correct
-- [ ] 5.3 Status badges render via `Badge` component
-- [ ] 5.4 `/receipts/upload` form matches new palette
-- [ ] 5.5 `/receipts/{id}` uses card surfaces; category badges via `Badge`
-- [ ] 5.6 QueryForm and UploadForm styling consistent with parent pages
-- [ ] 5.7 End-to-end: upload receipt → see in list → open detail → NL query works
+- [x] 5.2 `/receipts` renders with new dark palette; filter buttons correct
+- [x] 5.3 Status badges render via `Badge` component
+- [x] 5.4 `/receipts/upload` form matches new palette
+- [x] 5.5 `/receipts/{id}` uses card surfaces; category badges via `Badge`
+- [x] 5.6 QueryForm and UploadForm styling consistent with parent pages
+- [x] 5.7 End-to-end: upload receipt → see in list → open detail → NL query works
