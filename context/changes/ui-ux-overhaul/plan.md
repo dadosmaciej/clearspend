@@ -605,13 +605,13 @@ The Inter variable font bundle (`@fontsource-variable/inter`) is approximately 7
 
 #### Automated
 
-- [x] 5.1 `npm run build` passes
+- [x] 5.1 `npm run build` passes — 68314ea
 
 #### Manual
 
-- [x] 5.2 `/receipts` renders with new dark palette; filter buttons correct
-- [x] 5.3 Status badges render via `Badge` component
-- [x] 5.4 `/receipts/upload` form matches new palette
-- [x] 5.5 `/receipts/{id}` uses card surfaces; category badges via `Badge`
-- [x] 5.6 QueryForm and UploadForm styling consistent with parent pages
-- [x] 5.7 End-to-end: upload receipt → see in list → open detail → NL query works
+- [x] 5.2 `/receipts` renders with new dark palette; filter buttons correct — 68314ea
+- [x] 5.3 Status badges render via `Badge` component — 68314ea
+- [x] 5.4 `/receipts/upload` form matches new palette — 68314ea
+- [x] 5.5 `/receipts/{id}` uses card surfaces; category badges via `Badge` — 68314ea
+- [x] 5.6 QueryForm and UploadForm styling consistent with parent pages — 68314ea
+- [x] 5.7 End-to-end: upload receipt → see in list → open detail → NL query works — 68314ea
