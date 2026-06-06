@@ -312,24 +312,24 @@ All 9 tests in `src/pages/api/receipts/__tests__/upload.test.ts`. Each test is i
 
 #### Automated
 
-- [x] 2.1 npx astro check passes with no new errors
-- [x] 2.2 npm run lint passes
+- [x] 2.1 npx astro check passes with no new errors — 936e39d
+- [x] 2.2 npm run lint passes — 936e39d
 
 #### Manual
 
-- [x] 2.3 Code diff shows one new await supabase.from("receipts").update(...) line in the finalUpdateError block
+- [x] 2.3 Code diff shows one new await supabase.from("receipts").update(...) line in the finalUpdateError block — 936e39d
 
 ### Phase 3: Integration Tests — Upload Pipeline Failure Modes
 
 #### Automated
 
-- [ ] 3.1 npm test exits 0; 9 passing, 0 failing
-- [ ] 3.2 npm run lint passes on helpers.ts and upload.test.ts
-- [ ] 3.3 npx astro check passes on test files
+- [x] 3.1 npm test exits 0; 9 passing, 0 failing
+- [x] 3.2 npm run lint passes on helpers.ts and upload.test.ts
+- [x] 3.3 npx astro check passes on test files
 
 #### Manual
 
-- [ ] 3.4 supabase start running; supabase status confirms local instance
-- [ ] 3.5 npm test --reporter=verbose shows 9 named tests passing
-- [ ] 3.6 No leftover receipts rows in Supabase Studio after test run
-- [ ] 3.7 Commenting out Phase 2 fix turns S8 red; all other tests remain green
+- [x] 3.4 supabase start running; supabase status confirms local instance
+- [x] 3.5 npm test --reporter=verbose shows 9 named tests passing
+- [x] 3.6 No leftover receipts rows in Supabase Studio after test run
+- [x] 3.7 Commenting out Phase 2 fix turns S8 red; all other tests remain green
