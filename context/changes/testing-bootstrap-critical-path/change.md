@@ -1,7 +1,7 @@
 ---
 change_id: testing-bootstrap-critical-path
 title: Bootstrap Vitest and critical-path integration tests for upload pipeline failure modes
-status: implementing
+status: implemented
 created: 2026-06-03
 updated: 2026-06-06
 
