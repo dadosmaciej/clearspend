@@ -205,6 +205,7 @@ export const POST: APIRoute = async (context) => {
     .eq("id", receiptId);
 
   if (finalUpdateError) {
+    await supabase.from("receipts").update({ processing_status: "failed" }).eq("id", receiptId);
     return new Response(JSON.stringify({ error: "Failed to finalize receipt" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

@@ -298,26 +298,26 @@ All 9 tests in `src/pages/api/receipts/__tests__/upload.test.ts`. Each test is i
 
 #### Automated
 
-- [x] 1.1 npm install completes; node_modules/vitest exists
-- [x] 1.2 npm test exits 0; 1 passing (smoke test)
-- [x] 1.3 npm run lint passes
-- [x] 1.4 npx astro check passes
+- [x] 1.1 npm install completes; node_modules/vitest exists — e77905e
+- [x] 1.2 npm test exits 0; 1 passing (smoke test) — e77905e
+- [x] 1.3 npm run lint passes — e77905e
+- [x] 1.4 npx astro check passes — e77905e
 
 #### Manual
 
-- [x] 1.5 Terminal shows "1 passed" after npm test
-- [x] 1.6 .env.test is not tracked by git
+- [x] 1.5 Terminal shows "1 passed" after npm test — e77905e
+- [x] 1.6 .env.test is not tracked by git — e77905e
 
 ### Phase 2: Fix S8 processing_status Gap
 
 #### Automated
 
-- [ ] 2.1 npx astro check passes with no new errors
-- [ ] 2.2 npm run lint passes
+- [x] 2.1 npx astro check passes with no new errors
+- [x] 2.2 npm run lint passes
 
 #### Manual
 
-- [ ] 2.3 Code diff shows one new await supabase.from("receipts").update(...) line in the finalUpdateError block
+- [x] 2.3 Code diff shows one new await supabase.from("receipts").update(...) line in the finalUpdateError block
 
 ### Phase 3: Integration Tests — Upload Pipeline Failure Modes
 

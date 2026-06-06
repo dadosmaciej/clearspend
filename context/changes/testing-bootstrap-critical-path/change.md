@@ -4,6 +4,7 @@ title: Bootstrap Vitest and critical-path integration tests for upload pipeline 
 status: implementing
 created: 2026-06-03
 updated: 2026-06-06
+
 archived_at: null
 ---
 
