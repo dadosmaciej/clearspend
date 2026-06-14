@@ -297,28 +297,28 @@ No additional data fetching is needed.
 
 #### Manual
 
-- [x] 2.3 Idle state renders Delete button
-- [x] 2.4 Confirm state renders Yes/Cancel
-- [x] 2.5 Cancel returns to idle with no API call
-- [x] 2.6 Confirm triggers loading state then redirects on success
-- [x] 2.7 API error shows error message with Dismiss
-- [x] 2.8 Dismiss returns to idle
+- [x] 2.3 Idle state renders Delete button — 871ab0a
+- [x] 2.4 Confirm state renders Yes/Cancel — 871ab0a
+- [x] 2.5 Cancel returns to idle with no API call — 871ab0a
+- [x] 2.6 Confirm triggers loading state then redirects on success — 871ab0a
+- [x] 2.7 API error shows error message with Dismiss — 871ab0a
+- [x] 2.8 Dismiss returns to idle — 871ab0a
 
 ### Phase 3: Wire Into Both Pages
 
 #### Automated
 
-- [x] 3.1 TypeScript type-check passes
-- [x] 3.2 Lint passes
-- [x] 3.3 Build passes
+- [x] 3.1 TypeScript type-check passes — 871ab0a
+- [x] 3.2 Lint passes — 871ab0a
+- [x] 3.3 Build passes — 871ab0a
 
 #### Manual
 
-- [x] 3.4 List page — Delete button visible per row, link area still navigates
-- [x] 3.5 List page — confirm flow deletes and reloads list
-- [x] 3.6 Detail page — Delete button below line items
-- [x] 3.7 Detail page — confirm flow deletes and redirects to /receipts
-- [x] 3.8 Cancel leaves receipt intact on both pages
-- [x] 3.9 No orphaned line_items after delete (verify in DB)
-- [x] 3.10 Storage image removed after delete
-- [x] 3.11 Regression: date filter still works after row restructure
+- [x] 3.4 List page — Delete button visible per row, link area still navigates — 871ab0a
+- [x] 3.5 List page — confirm flow deletes and reloads list — 871ab0a
+- [x] 3.6 Detail page — Delete button below line items — 871ab0a
+- [x] 3.7 Detail page — confirm flow deletes and redirects to /receipts — 871ab0a
+- [x] 3.8 Cancel leaves receipt intact on both pages — 871ab0a
+- [x] 3.9 No orphaned line_items after delete (verify in DB) — 871ab0a
+- [x] 3.10 Storage image removed after delete — 871ab0a
+- [x] 3.11 Regression: date filter still works after row restructure — 871ab0a
