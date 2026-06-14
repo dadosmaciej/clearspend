@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { createClient } from "@/lib/supabase";
 import { QueryForm } from "@/components/receipts/QueryForm";
+import DeleteReceiptButton from "@/components/receipts/DeleteReceiptButton";
 
 // Compute preset date ranges
 const today = new Date();
@@ -124,10 +125,10 @@ const STATUS_CLASSES: Record<string, string> = {
       ) : (
         <ul class="flex flex-col gap-2">
           {receipts.map((r) => (
-            <li>
+            <li class="border-border bg-card flex items-center rounded-lg border">
               <a
                 href={`/receipts/${r.id}`}
-                class="border-border bg-card hover:bg-card/80 flex items-center justify-between rounded-lg border px-4 py-3 transition-colors"
+                class="hover:bg-card/80 flex flex-1 items-center justify-between rounded-lg px-4 py-3 transition-colors"
               >
                 <div class="flex flex-col gap-0.5">
                   <span class="text-foreground font-medium">{r.shop_name ?? "Unknown shop"}</span>
@@ -145,6 +146,9 @@ const STATUS_CLASSES: Record<string, string> = {
                   </span>
                 </div>
               </a>
+              <div class="pr-2">
+                <DeleteReceiptButton client:only="react" receiptId={r.id} />
+              </div>
             </li>
           ))}
         </ul>
