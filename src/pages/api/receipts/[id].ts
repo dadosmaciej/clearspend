@@ -25,9 +25,16 @@ export const DELETE: APIRoute = async (context) => {
     });
   }
 
-  const { data, error } = await supabase.from("receipts").delete().eq("id", id).select("image_path").single();
+  const { data, error } = await supabase
+    .from("receipts")
+    .delete()
+    .eq("id", id)
+    .eq("user_id", context.locals.user.id)
+    .select("image_path")
+    .single();
 
   if (error) {
+    // PGRST116 covers both "not found" and RLS-blocked — 404 intentional to avoid ownership leak
     if (error.code === "PGRST116") {
       return new Response(JSON.stringify({ error: "Not found" }), {
         status: 404,
@@ -40,6 +47,7 @@ export const DELETE: APIRoute = async (context) => {
     });
   }
 
+  // non-fatal — orphaned images are acceptable if storage cleanup fails
   await supabase.storage.from("receipts").remove([data.image_path]);
 
   return new Response(JSON.stringify({ success: true }), {

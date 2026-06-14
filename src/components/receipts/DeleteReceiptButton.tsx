@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -8,11 +8,14 @@ interface Props {
   receiptId: string;
 }
 
-export default function DeleteReceiptButton({ receiptId }: Props) {
+export function DeleteReceiptButton({ receiptId }: Props) {
   const [state, setState] = useState<State>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const submitting = useRef(false);
 
   const handleConfirm = async () => {
+    if (submitting.current) return;
+    submitting.current = true;
     setState("loading");
     try {
       const res = await fetch(`/api/receipts/${receiptId}`, { method: "DELETE" });
@@ -24,6 +27,7 @@ export default function DeleteReceiptButton({ receiptId }: Props) {
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong");
       setState("error");
+      submitting.current = false;
     }
   };
 
