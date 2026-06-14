@@ -2,16 +2,15 @@
 const { user } = Astro.locals;
 const pathname = Astro.url.pathname;
 
-const receiptsActive =
-  pathname.startsWith("/receipts") && !pathname.startsWith("/receipts/upload");
+const receiptsActive = pathname.startsWith("/receipts") && !pathname.startsWith("/receipts/upload");
 const uploadActive = pathname.startsWith("/receipts/upload");
 ---
 
-<nav class="sticky top-0 z-10 border-b border-border bg-background">
+<nav class="border-border bg-background sticky top-0 z-10 border-b">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
     <a
       href={user ? "/dashboard" : "/"}
-      class="text-lg font-semibold text-foreground transition-colors hover:text-foreground/80"
+      class="text-foreground hover:text-foreground/80 text-lg font-semibold transition-colors"
     >
       ClearSpend
     </a>
@@ -21,29 +20,22 @@ const uploadActive = pathname.startsWith("/receipts/upload");
         <div class="flex items-center gap-5">
           <a
             href="/receipts"
-            class={`text-sm transition-colors ${
-              receiptsActive
-                ? "font-medium text-foreground"
-                : "text-muted-foreground hover:text-foreground"
+            class:list={`text-sm transition-colors ${
+              receiptsActive ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Receipts
           </a>
           <a
             href="/receipts/upload"
-            class={`text-sm transition-colors ${
-              uploadActive
-                ? "font-medium text-foreground"
-                : "text-muted-foreground hover:text-foreground"
+            class:list={`text-sm transition-colors ${
+              uploadActive ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"
             }`}
           >
             Upload
           </a>
           <form method="POST" action="/api/auth/signout">
-            <button
-              type="submit"
-              class="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
+            <button type="submit" class="text-muted-foreground hover:text-foreground text-sm transition-colors">
               Sign out
             </button>
           </form>
@@ -52,9 +44,9 @@ const uploadActive = pathname.startsWith("/receipts/upload");
         <div class="flex items-center gap-4">
           <a
             href="/auth/signin"
-            class={`text-sm transition-colors ${
+            class:list={`text-sm transition-colors ${
               pathname === "/auth/signin"
-                ? "font-medium text-foreground"
+                ? "text-foreground font-medium"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >

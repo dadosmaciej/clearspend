@@ -64,7 +64,7 @@ const STATUS_CLASSES: Record<string, string> = {
     </div>
 
     <div class="mb-6 flex items-center justify-between">
-      <h1 class="text-2xl font-semibold text-foreground">Receipts</h1>
+      <h1 class="text-foreground text-2xl font-semibold">Receipts</h1>
       <a
         href="/receipts/upload"
         class="rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-purple-500"
@@ -101,18 +101,18 @@ const STATUS_CLASSES: Record<string, string> = {
         type="date"
         name="from"
         value={from}
-        class="rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground focus:ring-2 focus:ring-purple-500 focus:outline-none"
+        class="border-border bg-background text-foreground rounded-lg border px-3 py-1.5 text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
       />
-      <span class="text-sm text-muted-foreground">–</span>
+      <span class="text-muted-foreground text-sm">–</span>
       <input
         type="date"
         name="to"
         value={to}
-        class="rounded-lg border border-border bg-background px-3 py-1.5 text-sm text-foreground focus:ring-2 focus:ring-purple-500 focus:outline-none"
+        class="border-border bg-background text-foreground rounded-lg border px-3 py-1.5 text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
       />
       <button
         type="submit"
-        class="rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-card/80"
+        class="border-border bg-card text-muted-foreground hover:bg-card/80 rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors"
       >
         Apply
       </button>
@@ -127,11 +127,11 @@ const STATUS_CLASSES: Record<string, string> = {
             <li>
               <a
                 href={`/receipts/${r.id}`}
-                class="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:bg-card/80"
+                class="border-border bg-card hover:bg-card/80 flex items-center justify-between rounded-lg border px-4 py-3 transition-colors"
               >
                 <div class="flex flex-col gap-0.5">
-                  <span class="font-medium text-foreground">{r.shop_name ?? "Unknown shop"}</span>
-                  <span class="text-sm text-muted-foreground">{r.purchase_date ?? r.created_at.slice(0, 10)}</span>
+                  <span class="text-foreground font-medium">{r.shop_name ?? "Unknown shop"}</span>
+                  <span class="text-muted-foreground text-sm">{r.purchase_date ?? r.created_at.slice(0, 10)}</span>
                 </div>
                 <div class="flex items-center gap-3">
                   {r.total_amount != null && <span class="text-foreground">€{r.total_amount.toFixed(2)}</span>}

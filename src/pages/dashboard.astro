@@ -33,8 +33,8 @@ const STATUS_CLASSES: Record<string, string> = {
 
 <Layout title="Dashboard">
   <div class="mx-auto max-w-3xl px-4 py-8">
-    <h1 class="mb-1 text-2xl font-bold text-foreground">Welcome back</h1>
-    <p class="mb-8 text-sm text-muted-foreground">{user?.email}</p>
+    <h1 class="text-foreground mb-1 text-2xl font-bold">Welcome back</h1>
+    <p class="text-muted-foreground mb-8 text-sm">{user?.email}</p>
 
     <a
       href="/receipts/upload"
@@ -58,11 +58,11 @@ const STATUS_CLASSES: Record<string, string> = {
       Upload receipt
     </a>
 
-    <h2 class="mb-4 mt-10 text-lg font-semibold text-foreground">Recent receipts</h2>
+    <h2 class="text-foreground mt-10 mb-4 text-lg font-semibold">Recent receipts</h2>
 
     {
       recentReceipts.length === 0 ? (
-        <p class="text-sm text-muted-foreground">
+        <p class="text-muted-foreground text-sm">
           No receipts yet.{" "}
           <a href="/receipts/upload" class="text-purple-400 hover:text-purple-300">
             Upload your first receipt →
@@ -74,22 +74,18 @@ const STATUS_CLASSES: Record<string, string> = {
             <li>
               <a
                 href={`/receipts/${r.id}`}
-                class="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 transition-colors hover:bg-card/80"
+                class="border-border bg-card hover:bg-card/80 flex items-center justify-between rounded-lg border px-4 py-3 transition-colors"
               >
                 <div>
-                  <p class={r.shop_name ? "text-sm font-medium text-foreground" : "text-sm text-muted-foreground"}>
+                  <p class:list={r.shop_name ? "text-foreground text-sm font-medium" : "text-muted-foreground text-sm"}>
                     {r.shop_name ?? "Unknown shop"}
                   </p>
-                  <p class="text-xs text-muted-foreground">
-                    {r.purchase_date ?? r.created_at.slice(0, 10)}
-                  </p>
+                  <p class="text-muted-foreground text-xs">{r.purchase_date ?? r.created_at.slice(0, 10)}</p>
                 </div>
                 <div class="flex items-center gap-3">
-                  {r.total_amount != null && (
-                    <span class="text-sm text-foreground">€{r.total_amount.toFixed(2)}</span>
-                  )}
+                  {r.total_amount != null && <span class="text-foreground text-sm">€{r.total_amount.toFixed(2)}</span>}
                   <span
-                    class={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_CLASSES[r.processing_status] ?? STATUS_CLASSES.pending}`}
+                    class:list={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${STATUS_CLASSES[r.processing_status] ?? STATUS_CLASSES.pending}`}
                   >
                     {STATUS_LABELS[r.processing_status] ?? "Pending"}
                   </span>

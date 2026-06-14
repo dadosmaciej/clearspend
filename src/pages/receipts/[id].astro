@@ -51,21 +51,21 @@ const CATEGORY_CLASSES: Record<string, string> = {
   <main class="mx-auto max-w-2xl px-4 py-8">
     <a
       href="/receipts"
-      class="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+      class="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center gap-1 text-sm transition-colors"
     >
       ← Back to receipts
     </a>
 
     <!-- Header -->
     <div class="mb-6">
-      <h1 class="text-2xl font-semibold text-foreground">
+      <h1 class="text-foreground text-2xl font-semibold">
         {receipt.shop_name ?? "Unknown shop"}
       </h1>
-      <div class="mt-1 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
+      <div class="text-muted-foreground mt-1 flex flex-wrap items-center gap-3 text-sm">
         <span>{receipt.purchase_date ?? "Date unknown"}</span>
         {
           receipt.total_amount != null && (
-            <span class="font-medium text-foreground">€{receipt.total_amount.toFixed(2)}</span>
+            <span class="text-foreground font-medium">€{receipt.total_amount.toFixed(2)}</span>
           )
         }
       </div>
@@ -88,7 +88,7 @@ const CATEGORY_CLASSES: Record<string, string> = {
     }
     {
       receipt.processing_status === "pending" && (
-        <div class="mb-6 rounded-lg border border-border bg-card px-4 py-3 text-sm text-muted-foreground">
+        <div class="border-border bg-card text-muted-foreground mb-6 rounded-lg border px-4 py-3 text-sm">
           Queued for processing.
         </div>
       )
@@ -102,7 +102,7 @@ const CATEGORY_CLASSES: Record<string, string> = {
             <img
               src={imageUrl}
               alt="Receipt"
-              class="max-w-xs rounded-lg border border-border transition-opacity hover:opacity-80"
+              class="border-border max-w-xs rounded-lg border transition-opacity hover:opacity-80"
             />
           </a>
         </div>
@@ -113,11 +113,11 @@ const CATEGORY_CLASSES: Record<string, string> = {
     {
       lineItems.length > 0 ? (
         <div>
-          <h2 class="mb-3 text-lg font-medium text-foreground">Line items ({lineItems.length})</h2>
+          <h2 class="text-foreground mb-3 text-lg font-medium">Line items ({lineItems.length})</h2>
           <ul class="flex flex-col gap-2">
             {lineItems.map((item) => (
-              <li class="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3">
-                <span class="font-medium text-foreground">{item.name}</span>
+              <li class="border-border bg-card flex items-center justify-between rounded-lg border px-4 py-3">
+                <span class="text-foreground font-medium">{item.name}</span>
                 <div class="flex items-center gap-3">
                   {item.category && (
                     <span

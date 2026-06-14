@@ -45,20 +45,20 @@ export function QueryForm() {
   }
 
   return (
-    <div className="rounded-lg border border-border bg-card">
+    <div className="border-border bg-card rounded-lg border">
       <button
         type="button"
         onClick={() => {
           setOpen((o) => !o);
         }}
-        className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-left text-sm font-medium text-foreground transition-colors hover:bg-card/80"
+        className="text-foreground hover:bg-card/80 flex w-full items-center justify-between rounded-lg px-4 py-3 text-left text-sm font-medium transition-colors"
       >
         <span>Ask about your expenses</span>
         <span className="text-muted-foreground">{open ? "▴" : "▾"}</span>
       </button>
 
       {open && (
-        <div className="border-t border-border px-4 pt-3 pb-4">
+        <div className="border-border border-t px-4 pt-3 pb-4">
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <textarea
               rows={2}
@@ -68,7 +68,7 @@ export function QueryForm() {
               }}
               disabled={loading}
               placeholder="e.g. How much did I spend on food last month?"
-              className="w-full resize-none rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:ring-2 focus:ring-purple-500 focus:outline-none disabled:opacity-50"
+              className="border-border bg-background text-foreground placeholder:text-muted-foreground w-full resize-none rounded-lg border px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:outline-none disabled:opacity-50"
             />
 
             <button
@@ -95,20 +95,20 @@ export function QueryForm() {
 
           {result && (
             <div className="mt-4 flex flex-col gap-3">
-              <p className="text-sm leading-relaxed text-foreground">{result.answer}</p>
+              <p className="text-foreground text-sm leading-relaxed">{result.answer}</p>
 
               {result.sources.length > 0 && (
                 <div className="flex flex-col gap-2">
-                  <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">Sources</span>
+                  <span className="text-muted-foreground text-xs font-medium tracking-wide uppercase">Sources</span>
                   {result.sources.map((s) => (
                     <a
                       key={s.id}
                       href={`/receipts/${s.id}`}
-                      className="flex items-center justify-between rounded-lg border border-border bg-background px-3 py-2 text-sm transition-colors hover:bg-card"
+                      className="border-border bg-background hover:bg-card flex items-center justify-between rounded-lg border px-3 py-2 text-sm transition-colors"
                     >
                       <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-foreground">{s.shop_name ?? "Unknown shop"}</span>
-                        {s.purchase_date && <span className="text-xs text-muted-foreground">{s.purchase_date}</span>}
+                        <span className="text-foreground font-medium">{s.shop_name ?? "Unknown shop"}</span>
+                        {s.purchase_date && <span className="text-muted-foreground text-xs">{s.purchase_date}</span>}
                       </div>
                       <div className="flex items-center gap-2">
                         {s.total_amount != null && (

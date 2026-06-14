@@ -5,12 +5,10 @@ import Layout from "@/layouts/Layout.astro";
 <Layout title="ClearSpend — Know what's in every receipt">
   <!-- Hero -->
   <section class="mx-auto max-w-3xl px-4 py-24 text-center sm:py-32">
-    <h1 class="mb-6 text-4xl font-bold text-foreground sm:text-5xl">
-      Know what's in every receipt
-    </h1>
-    <p class="mx-auto mb-10 max-w-xl text-lg text-muted-foreground">
-      Upload a receipt photo. ClearSpend extracts every line item automatically
-      and makes your expenses conversationally queryable.
+    <h1 class="text-foreground mb-6 text-4xl font-bold sm:text-5xl">Know what's in every receipt</h1>
+    <p class="text-muted-foreground mx-auto mb-10 max-w-xl text-lg">
+      Upload a receipt photo. ClearSpend extracts every line item automatically and makes your expenses conversationally
+      queryable.
     </p>
     <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
       <a
@@ -21,7 +19,7 @@ import Layout from "@/layouts/Layout.astro";
       </a>
       <a
         href="/auth/signin"
-        class="inline-flex items-center justify-center rounded-lg border border-border px-6 py-3 text-base font-medium text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
+        class="border-border text-muted-foreground hover:bg-card hover:text-foreground inline-flex items-center justify-center rounded-lg border px-6 py-3 text-base font-medium transition-colors"
       >
         Sign in
       </a>
@@ -30,15 +28,11 @@ import Layout from "@/layouts/Layout.astro";
 
   <!-- How it works -->
   <section class="mx-auto max-w-4xl px-4 py-16">
-    <h2 class="mb-12 text-center text-2xl font-semibold text-foreground">
-      How it works
-    </h2>
+    <h2 class="text-foreground mb-12 text-center text-2xl font-semibold">How it works</h2>
     <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
       <!-- Step 1 -->
       <div class="text-center">
-        <div
-          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10"
-        >
+        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
@@ -51,29 +45,18 @@ import Layout from "@/layouts/Layout.astro";
             stroke-linejoin="round"
             class="text-purple-400"
           >
-            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"
-            ></path>
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
             <circle cx="12" cy="13" r="3"></circle>
           </svg>
         </div>
-        <div
-          class="mb-2 text-xs font-semibold uppercase tracking-wider text-purple-400"
-        >
-          Step 1
-        </div>
-        <h3 class="mb-2 font-semibold text-foreground">
-          Photograph your receipt
-        </h3>
-        <p class="text-sm text-muted-foreground">
-          Take a photo with your phone and upload from your gallery.
-        </p>
+        <div class="mb-2 text-xs font-semibold tracking-wider text-purple-400 uppercase">Step 1</div>
+        <h3 class="text-foreground mb-2 font-semibold">Photograph your receipt</h3>
+        <p class="text-muted-foreground text-sm">Take a photo with your phone and upload from your gallery.</p>
       </div>
 
       <!-- Step 2 -->
       <div class="text-center">
-        <div
-          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10"
-        >
+        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
@@ -95,24 +78,14 @@ import Layout from "@/layouts/Layout.astro";
             <path d="M17 19h4"></path>
           </svg>
         </div>
-        <div
-          class="mb-2 text-xs font-semibold uppercase tracking-wider text-purple-400"
-        >
-          Step 2
-        </div>
-        <h3 class="mb-2 font-semibold text-foreground">
-          Items extracted automatically
-        </h3>
-        <p class="text-sm text-muted-foreground">
-          Every line item, price, shop name, and date is pulled out by AI.
-        </p>
+        <div class="mb-2 text-xs font-semibold tracking-wider text-purple-400 uppercase">Step 2</div>
+        <h3 class="text-foreground mb-2 font-semibold">Items extracted automatically</h3>
+        <p class="text-muted-foreground text-sm">Every line item, price, shop name, and date is pulled out by AI.</p>
       </div>
 
       <!-- Step 3 -->
       <div class="text-center">
-        <div
-          class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10"
-        >
+        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-purple-600/10">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
@@ -125,19 +98,12 @@ import Layout from "@/layouts/Layout.astro";
             stroke-linejoin="round"
             class="text-purple-400"
           >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-            ></path>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
         </div>
-        <div
-          class="mb-2 text-xs font-semibold uppercase tracking-wider text-purple-400"
-        >
-          Step 3
-        </div>
-        <h3 class="mb-2 font-semibold text-foreground">
-          Ask questions in plain English
-        </h3>
-        <p class="text-sm text-muted-foreground">
+        <div class="mb-2 text-xs font-semibold tracking-wider text-purple-400 uppercase">Step 3</div>
+        <h3 class="text-foreground mb-2 font-semibold">Ask questions in plain English</h3>
+        <p class="text-muted-foreground text-sm">
           Query your expense history naturally: "How much on food last month?"
         </p>
       </div>
@@ -146,9 +112,7 @@ import Layout from "@/layouts/Layout.astro";
 
   <!-- Footer CTA -->
   <section class="mx-auto max-w-3xl px-4 py-16 text-center">
-    <h2 class="mb-6 text-2xl font-semibold text-foreground">
-      Start tracking your expenses
-    </h2>
+    <h2 class="text-foreground mb-6 text-2xl font-semibold">Start tracking your expenses</h2>
     <a
       href="/auth/signup"
       class="inline-flex items-center justify-center rounded-lg bg-purple-600 px-6 py-3 text-base font-medium text-white transition-colors hover:bg-purple-500"
