@@ -37,7 +37,7 @@
   - Tradeoff: One undocumented assumption; any future RLS change silently becomes a privilege escalation.
   - Confidence: LOW — the rest of the codebase doesn't rely on RLS alone for writes.
   - Blind spot: Future developers won't know RLS is load-bearing here.
-- **Decision**: PENDING
+- **Decision**: FIXED via Fix A — `54f7969`
 
 ### F2 — Default export breaks named-export convention
 
@@ -47,7 +47,7 @@
 - **Location**: `src/components/receipts/DeleteReceiptButton.tsx:11`
 - **Detail**: `DeleteReceiptButton` uses `export default function`. Both `UploadForm.tsx` and `QueryForm.tsx` use named exports (`export function UploadForm`, `export function QueryForm`). The import in `index.astro:5` reflects this inconsistency — `import DeleteReceiptButton from ...` vs `import { QueryForm } from ...` on the same page.
 - **Fix**: Change to `export function DeleteReceiptButton(...)` and update the two import sites (`index.astro:5`, `[id].astro:4`) to use `{ DeleteReceiptButton }`.
-- **Decision**: PENDING
+- **Decision**: FIXED — `54f7969`
 
 ### F3 — "Yes, delete" button unguarded during in-flight request
 
@@ -57,7 +57,7 @@
 - **Location**: `src/components/receipts/DeleteReceiptButton.tsx:50`
 - **Detail**: The "Yes, delete" button has no `disabled` prop. React's state batching means a rapid second click between the first click and the re-render that shows the `loading` state can dispatch a second `fetch`. The second request will get a 404 (receipt already deleted), which pushes the UI into the error state unnecessarily.
 - **Fix**: Add `disabled={state === "loading"}` to the "Yes, delete" button (line 50).
-- **Decision**: PENDING
+- **Decision**: FIXED — `54f7969`
 
 ### F4 — Storage remove error silently discarded
 
@@ -67,7 +67,7 @@
 - **Location**: `src/pages/api/receipts/[id].ts:43`
 - **Detail**: `await supabase.storage.from("receipts").remove([data.image_path])` discards the `{ error }` result. The no-console lint rule prevented the originally-planned `console.error` call, leaving storage failures completely invisible. The plan explicitly accepted orphaned images as an outcome, so this is not a correctness issue, but there is no signal when cleanup fails.
 - **Fix**: Destructure the error and discard it with a comment: `const { error: _storageErr } = await supabase.storage.from("receipts").remove([data.image_path]); // non-fatal — orphaned images are acceptable`.
-- **Decision**: PENDING
+- **Decision**: FIXED — `54f7969`
 
 ### F5 — PGRST116 covers RLS-blocked rows — undocumented
 
@@ -77,4 +77,4 @@
 - **Location**: `src/pages/api/receipts/[id].ts:31–35`
 - **Detail**: The `PGRST116` check correctly returns 404 for both non-existent receipts and receipts blocked by RLS (another user's receipt). Future maintainers might change this to a 403 for the RLS case without knowing the PGRST116 code covers both paths — accidentally leaking receipt ownership via the status code.
 - **Fix**: Add a single comment: `// PGRST116 = zero rows — covers both "not found" and RLS-blocked (don't 403 here; it leaks ownership)`.
-- **Decision**: PENDING
+- **Decision**: FIXED — `54f7969`
