@@ -278,22 +278,22 @@ No additional data fetching is needed.
 
 #### Automated
 
-- [x] 1.1 TypeScript type-check passes
-- [x] 1.2 Lint passes
+- [x] 1.1 TypeScript type-check passes — dd10bb8
+- [x] 1.2 Lint passes — dd10bb8
 
 #### Manual
 
-- [x] 1.3 DELETE own receipt → 200, row + line_items gone, image removed from Storage
-- [x] 1.4 DELETE other user's receipt → 404
-- [x] 1.5 DELETE non-existent id → 404
-- [x] 1.6 DELETE without session → 401
+- [x] 1.3 DELETE own receipt → 200, row + line_items gone, image removed from Storage — dd10bb8
+- [x] 1.4 DELETE other user's receipt → 404 — dd10bb8
+- [x] 1.5 DELETE non-existent id → 404 — dd10bb8
+- [x] 1.6 DELETE without session → 401 — dd10bb8
 
 ### Phase 2: DeleteReceiptButton Component
 
 #### Automated
 
-- [ ] 2.1 TypeScript type-check passes
-- [ ] 2.2 Lint passes
+- [x] 2.1 TypeScript type-check passes
+- [x] 2.2 Lint passes
 
 #### Manual
 
